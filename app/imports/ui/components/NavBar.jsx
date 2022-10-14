@@ -1,63 +1,53 @@
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
-import { useTracker } from 'meteor/react-meteor-data';
-import { NavLink } from 'react-router-dom';
-import { Roles } from 'meteor/alanning:roles';
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { BoxArrowRight, PersonFill, PersonPlusFill } from 'react-bootstrap-icons';
+import { Navbar, Nav, NavDropdown, Image } from 'react-bootstrap';
+import { Search } from 'react-bootstrap-icons';
 
-const NavBar = () => {
-  // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-  const { currentUser } = useTracker(() => ({
-    currentUser: Meteor.user() ? Meteor.user().username : '',
-  }), []);
+const NavBar = () => (
+  <Navbar className="sticky-top bg-white justify-content-center">
 
-  return (
-    <Navbar bg="light" expand="lg">
-      <Container>
-        <Navbar.Brand as={NavLink} to="/">
-          <h2>meteor-application-template-react</h2>
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto justify-content-start">
-            {currentUser ? ([
-              <Nav.Link id="add-stuff-nav" as={NavLink} to="/add" key="add">Add Stuff</Nav.Link>,
-              <Nav.Link id="list-stuff-nav" as={NavLink} to="/list" key="list">List Stuff</Nav.Link>,
-            ]) : ''}
-            {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-              <Nav.Link id="list-stuff-admin-nav" as={NavLink} to="/admin" key="admin">Admin</Nav.Link>
-            ) : ''}
-          </Nav>
-          <Nav className="justify-content-end">
-            {currentUser === '' ? (
-              <NavDropdown id="login-dropdown" title="Login">
-                <NavDropdown.Item id="login-dropdown-sign-in" as={NavLink} to="/signin">
-                  <PersonFill />
-                  Sign
-                  in
-                </NavDropdown.Item>
-                <NavDropdown.Item id="login-dropdown-sign-up" as={NavLink} to="/signup">
-                  <PersonPlusFill />
-                  Sign
-                  up
-                </NavDropdown.Item>
-              </NavDropdown>
-            ) : (
-              <NavDropdown id="navbar-current-user" title={currentUser}>
-                <NavDropdown.Item id="navbar-sign-out" as={NavLink} to="/signout">
-                  <BoxArrowRight />
-                  {' '}
-                  Sign
-                  out
-                </NavDropdown.Item>
-              </NavDropdown>
-            )}
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-  );
-};
+    <Navbar.Brand id="logo">
+      <Image width="100" src="./images/logo.png" alt="logo" />
+    </Navbar.Brand>
+
+    <Nav className="container-fluid">
+      <NavDropdown title="ABOUT US">
+        <NavDropdown.Item>Contact Us</NavDropdown.Item>
+        <NavDropdown.Item>Our Story</NavDropdown.Item>
+      </NavDropdown>
+
+      <NavDropdown title="MENU">
+        <NavDropdown.Item href="#">Our Drinks</NavDropdown.Item>
+        <NavDropdown.Item href="#">Our Macarons</NavDropdown.Item>
+        <NavDropdown.Item href="#">Our Merchandise</NavDropdown.Item>
+      </NavDropdown>
+
+      <NavDropdown title="EVENTS & FUNDRAISING">
+        <NavDropdown.Item href="#">Events</NavDropdown.Item>
+        <NavDropdown.Item href="#">Fundraising</NavDropdown.Item>
+      </NavDropdown>
+
+      <Nav.Link href="#">LOCATIONS</Nav.Link>
+
+      <NavDropdown title="CAREERS">
+        <NavDropdown.Item href="#">San Jose Hiring</NavDropdown.Item>
+        <NavDropdown.Item href="#">San Bernardino County Hiring</NavDropdown.Item>
+        <NavDropdown.Item href="#">Riverside County Hiring</NavDropdown.Item>
+      </NavDropdown>
+
+      <Nav.Item>
+        <Nav.Link href="#">ARTISAN</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="#">MOBILE APP</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="#">FRANCHISE</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Search className="mt-2" />
+      </Nav.Item>
+    </Nav>
+  </Navbar>
+);
 
 export default NavBar;

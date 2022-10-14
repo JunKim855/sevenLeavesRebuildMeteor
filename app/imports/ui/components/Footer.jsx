@@ -1,26 +1,20 @@
 import React from 'react';
-import { Col, Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
+import { Facebook, Instagram, Twitter} from 'react-bootstrap-icons';
 
-/** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 const Footer = () => (
-  <footer className="mt-auto py-3 bg-light">
-    <Container>
-      <Col className="text-center">
-        Department of Information and Computer Sciences
-        {' '}
-        <br />
-        University of Hawaii
-        <br />
-        Honolulu, HI 96822
-        {' '}
-        <br />
-        <a href="http://ics-software-engineering.github.io/meteor-application-template-react">
-          Template Home
-          Page
-        </a>
-      </Col>
-    </Container>
-  </footer>
+  <Container className="pb-5">
+    <hr className="text-muted" />
+    <hr className="text-muted" />
+    <span>7 Leaves Cafe, All Rights Reserved. Coffee Tea Goodness | <span className="text-danger">Home</span> | <span className="text-danger">Accessibility Statement</span> | <span className="text-danger">Privacy Policy</span></span><br />
+    <span>© 2011-2022.</span>
+    <span id="social-media">
+      <span className="m-3">Connect with us:</span>
+      <Facebook />&nbsp;&nbsp;
+      <Instagram />&nbsp;&nbsp;
+      <Twitter />&nbsp;&nbsp;
+    </span>
+  </Container>
 );
 
 export default Footer;
